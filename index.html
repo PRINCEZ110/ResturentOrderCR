@@ -10,13 +10,92 @@
     <!--Content of the page-->
     <h1>Resturent Order Calculator</h1>
 
-    <!-- Food Menu -->
-     <div id=""menu-container>
+    
+     <div id="menu-container">
 
+        <!-- Food Menu:  #1-->
+        <div class="menu-item" data-id="1">
+            <h3>Chicken Burger</h3>
+            <p>Price: Rs. 300</p>
+
+            <div>
+                <button onclick="decreaseQuantity(1)">-</button>
+                <span id="qty-1">0</span>
+                <button onclick="increaseQuantity(1)">+</button>
+            </div>
+            <p>Item Total: Rs. <span id="total-1">0</span></p>
+        </div>
+     
+
+
+      <!-- Food Menu: VegBurger #2-->
+        <div class="menu-item" data-id="2">
+            <h3>VegBurger</h3>
+            <p>Price: Rs. 250</p>
+            <div>
+                <button onclick="decreaseQuantity(2)">-</button>
+                <span id="qty-2">0</span>
+                <button onclick="increaseQuantity(2)">+</button>
+            </div>
+            <p>Item Total: Rs. <span id="total-2">0</span></p>
+        </div>
+     
+
+
+     <!-- Food Menu: Chicken Pizza   #3-->
+        <div class="menu-item" data-id="3">
+            <h3>Chicken Pizza</h3>
+            <p>Price: Rs. 480</p>
+            <div>
+                <button onclick="decreaseQuantity(3)">-</button>
+                <span id="qty-3">0</span>
+                <button onclick="increaseQuantity(3)">+</button>
+            </div>
+            <p>Item Total: Rs. <span id="total-3">0</span></p>
+        </div>
+
+
+        <!-- Food Menu: Chicken Biryani #4-->
+        <div class="menu-item" data-id="4">
+            <h3>Chicken Biryani</h3>
+            <p>Price: Rs. 450</p>
+            <div>
+                <button onclick="decreaseQuantity(4)">-</button>
+                <span id="qty-4">0</span>
+                <button onclick="increaseQuantity(4)">+</button>
+            </div>
+            <p>Item Total: Rs. <span id="total-4">0</span></p>
+        </div>
+     
+
+
+     <!-- Food Menu: French Fries #5-->
+        <div class="menu-item" data-id="5">
+            <h3>French Fries</h3>
+            <p>Price: Rs. 200</p>
+            <div>
+                <button onclick="decreaseQuantity(5)">-</button>
+                <span id="qty-5">0</span>
+                <button onclick="increaseQuantity(5)">+</button>
+            </div>
+            <p>Item Total: Rs. <span id="total-5">0</span></p>
+        </div>
+        
      </div>
 
 
-    
+     <!--Order Summary-->
+     <div id="order-summary">
+        <h2>Order Summary</h2>
+        <div id="summary-items">
+            
+            <!-- find this by javascript -->
+             <p>No items selected yet.</p>
+        </div>
+        <hr>
+        <p><strong>subtotal:</strong> Rs. <span id="subtotal">0</span></p>
+     </div>
+        
      <script src="script.js"></script>
 </body>
 </html>
