@@ -51,10 +51,10 @@ function decreaseQuantity(itemId) {
 function updateItemTotal(itemId, quantity) {
 
     //Get the prce for this item from our prices object 
-    const price = price[itemId];
+    const itemPrice = price[itemId];
 
     //calculate: item total = Price * Quantity
-    const total = price * quantity;
+    const total = itemPrice * quantity;
 
     //Find the HTML element that shows the total for this item
     const totalElement = document.getElementById("total-" + itemId);
