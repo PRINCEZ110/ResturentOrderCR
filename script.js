@@ -61,4 +61,5 @@ function updateItemTotal(itemId, quantity) {
 
     //Update the HTML to show the new total
     totalElement.textContent = total;
+    updateSummary();    //update the summary after updating the item total
 }
