@@ -24,5 +24,41 @@ function increaseQuantity(itemId){
 
     //Step E: Update the item total for this item
     updateItemTotal(itemId, currentQuantity);
+}
 
+//3. Function to DECREASE quantity 
+function decreaseQuantity(itemId) {
+
+    //Find the Quantity element
+    const quantityElement = document.getElementById("qty-" + itemId);
+
+    // Get the current quantity as a number
+    let currentQuantity = parseInt(quantityElement.textContent);
+
+    // Decrease the quantity by 1, only if its greater then 0 or but not below 0
+    if (currentQuantity > 0) {
+        currentQuantity = currentQuantity -1;
+    }
+
+    //update the Html
+    quantityElement.textContent = currentQuantity;
+
+    // update the item total
+    updateItemTotal(itemId, currentQuantity);
+}
+
+//4. Function to update the item total (price * quantity)
+function updateItemTotal(itemId, quantity) {
+
+    //Get the prce for this item from our prices object 
+    const price = price[itemId];
+
+    //calculate: item total = Price * Quantity
+    const total = price * quantity;
+
+    //Find the HTML element that shows the total for this item
+    const totalElement = document.getElementById("total-" + itemId);
+
+    //Update the HTML to show the new total
+    totalElement.textContent = total;
 }
