@@ -103,5 +103,13 @@ function updateSummary() {
 
         }
     }
+    if (htmlContent === "") { 
+        htmlContent = "<p>No items selected yet. </p>";
+    }
+
+    summaryContainer.innerHTML = htmlContainer;
+
+    const subtotalElement = document.getElementById("subtotal");
+    subtotalElement.textContent = subtotal;
 }
 
