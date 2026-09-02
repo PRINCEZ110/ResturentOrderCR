@@ -63,3 +63,45 @@ function updateItemTotal(itemId, quantity) {
     totalElement.textContent = total;
     updateSummary();    //update the summary after updating the item total
 }
+
+//5. function to update the order summary
+function updateSummary() {
+
+    //Get the container where we wiol put the summary items.
+    const summaryContainer = document.getElementById("summary-Items");
+
+    //Prepare a variable to store the subtotal
+    let subtotal = 0;
+
+    //Prepare a variabel to store the html we will build
+    let htmlContent = ""; 
+
+
+    for (let i = 1; i <= 5; i++) {
+        const qtyElement = document.getElementById("qty-" + i);
+        let quantity = parseInt(qtyElement.textContent);
+
+        if (quantity > 0) {
+            const price = prices[i];
+            const lineTotal = price * quantity;
+            subtotal = subtotal + lineTotal;
+
+            let itemName = "";
+            if (i === 1) itemName = "Chicken Burger";
+            else if (i === 2) itemName = "Veg Burger";
+            else if (i === 3) itemName = "Chicken Pizza";
+            else if (i === 4) itemName = "Chicken Biryani";
+            else if (i === 5) itemName = "French Fries";
+
+            htmlContent = htmlContent + `
+                <div class="summary-line">
+                    <span><strong>${itemName}</strong></span>
+                    <span>${quantity}  x Rs. ${price}</span>
+                    <span><strong>Rs. ${lineTotal}</strong><span>
+                <div/>
+            `; 
+
+        }
+    }
+}
+
