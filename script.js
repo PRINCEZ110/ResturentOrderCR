@@ -71,17 +71,16 @@ function updateSummary() {
     const summaryContainer = document.getElementById("summary-items");
     let subtotal = 0;
     let htmlContent = ""; 
+    
     for (let i = 1; i <= 5; i++) {
         const qtyElement = document.getElementById("qty-" + i);
         let quantity = parseInt(qtyElement.textContent);
 
-        
         if (quantity > 0) {
             const price = prices[i];
             const lineTotal = price * quantity;
             subtotal = subtotal + lineTotal;
 
-            
             let itemName = "";
             if (i === 1) itemName = "Chicken Burger";
             else if (i === 2) itemName = "Veg Burger";
@@ -89,7 +88,6 @@ function updateSummary() {
             else if (i === 4) itemName = "Chicken Biryani";
             else if (i === 5) itemName = "French Fries";
 
-            
             htmlContent = htmlContent + `
                 <div class="summary-line">
                     <span><strong>${itemName}</strong></span>
@@ -100,24 +98,35 @@ function updateSummary() {
         }
     }
 
-    
     if (htmlContent === "") {
         htmlContent = "<p>No items selected yet.</p>";
     }
 
-    
     summaryContainer.innerHTML = htmlContent;
+    
+    // Update subtotal
     const subtotalElement = document.getElementById("subtotal");
     subtotalElement.textContent = subtotal;
+    
+    //  Calculate and update Grand Total
+    const grandTotal = subtotal + deliveryCharge;
+    document.getElementById("grand-total").textContent = grandTotal;
 }
 
-// 6. order type & delivery charge
+
+// 6. Order Type & Delivery Charge
+
+
 let deliveryCharge = 0;
-function updateorderType() {
+
+
+function updateOrderType() {
+    // Find which radio button is checked
     const selectedType = document.querySelector('input[name="orderType"]:checked');
 
     if (selectedType) {
-        const type = selectedType.ariaValueMax;
+       
+        const type = selectedType.value;
         if (type === 'delivery') {
             deliveryCharge = 100;
         } else {
@@ -125,15 +134,20 @@ function updateorderType() {
         }
     }
 
+    // Update the delivery charge display
     document.getElementById('delivery-charge').textContent = deliveryCharge;
 
+    // Update the summary (which will update grand total)
     updateSummary();
 }
 
+// Wait for the page to load, then attach event listeners
 document.addEventListener('DOMContentLoaded', function () {
     const radioButtons = document.querySelectorAll('input[name="orderType"]');
     radioButtons.forEach(function(radio) {
         radio.addEventListener('change', updateOrderType);
     });
+    
+    // Run once to set the initial state
     updateOrderType();
-})
+});
