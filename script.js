@@ -68,29 +68,20 @@ function updateItemTotal(itemId, quantity) {
 
 //5. function to update the order summary
 function updateSummary() {
-
-    //Get the container where we will put the summary items.
-    // 🔥 FIXED: Changed "summary-Items" to "summary-items" (lowercase 'i')
     const summaryContainer = document.getElementById("summary-items");
-
-    //Prepare a variable to store the subtotal
     let subtotal = 0;
-
-    //Prepare a variable to store the HTML we will build
     let htmlContent = ""; 
-
-    // Loop through all 5 items
     for (let i = 1; i <= 5; i++) {
         const qtyElement = document.getElementById("qty-" + i);
         let quantity = parseInt(qtyElement.textContent);
 
-        // Only show items with quantity greater than 0
+        
         if (quantity > 0) {
             const price = prices[i];
             const lineTotal = price * quantity;
             subtotal = subtotal + lineTotal;
 
-            // Get the item name
+            
             let itemName = "";
             if (i === 1) itemName = "Chicken Burger";
             else if (i === 2) itemName = "Veg Burger";
@@ -98,7 +89,7 @@ function updateSummary() {
             else if (i === 4) itemName = "Chicken Biryani";
             else if (i === 5) itemName = "French Fries";
 
-            // Build the HTML for this item in the summary
+            
             htmlContent = htmlContent + `
                 <div class="summary-line">
                     <span><strong>${itemName}</strong></span>
@@ -109,15 +100,40 @@ function updateSummary() {
         }
     }
 
-    // If no items were added, show a message
+    
     if (htmlContent === "") {
         htmlContent = "<p>No items selected yet.</p>";
     }
 
-    // Update the summary container with our built HTML
+    
     summaryContainer.innerHTML = htmlContent;
-
-    // Update the subtotal display
     const subtotalElement = document.getElementById("subtotal");
     subtotalElement.textContent = subtotal;
 }
+
+// 6. order type & delivery charge
+let deliveryCharge = 0;
+function updateorderType() {
+    const selectedType = document.querySelector('input[name="orderType"]:checked');
+
+    if (selectedType) {
+        const type = selectedType.ariaValueMax;
+        if (type === 'delivery') {
+            deliveryCharge = 100;
+        } else {
+            deliveryCharge = 0;
+        }
+    }
+
+    document.getElementById('delivery-charge').textContent = deliveryCharge;
+
+    updateSummary();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const radioButtons = document.querySelectorAll('input[name="orderType"]');
+    radioButtons.forEach(function(radio) {
+        radio.addEventListener('change', updateOrderType);
+    });
+    updateOrderType();
+})
