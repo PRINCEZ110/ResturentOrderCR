@@ -115,39 +115,32 @@ function updateSummary() {
 
 
 // 6. Order Type & Delivery Charge
-
-
 let deliveryCharge = 0;
-
-
 function updateOrderType() {
-    // Find which radio button is checked
     const selectedType = document.querySelector('input[name="orderType"]:checked');
-
     if (selectedType) {
        
         const type = selectedType.value;
         if (type === 'delivery') {
-            deliveryCharge = 100;
+        deliveryCharge = 100;
+    
+         document.getElementById('address-container').classList.remove('hidden');
         } else {
-            deliveryCharge = 0;
-        }
+         deliveryCharge = 0;
+    
+         document.getElementById('address-container').classList.add('hidden');
+}
     }
 
-    // Update the delivery charge display
-    document.getElementById('delivery-charge').textContent = deliveryCharge;
-
-    // Update the summary (which will update grand total)
-    updateSummary();
+         document.getElementById('delivery-charge').textContent = deliveryCharge;
+         updateSummary();
 }
 
-// Wait for the page to load, then attach event listeners
-document.addEventListener('DOMContentLoaded', function () {
-    const radioButtons = document.querySelectorAll('input[name="orderType"]');
-    radioButtons.forEach(function(radio) {
-        radio.addEventListener('change', updateOrderType);
+         document.addEventListener('DOMContentLoaded', function () {
+         const radioButtons = document.querySelectorAll('input[name="orderType"]');
+         radioButtons.forEach(function(radio) {
+         radio.addEventListener('change', updateOrderType);
     });
     
-    // Run once to set the initial state
-    updateOrderType();
+         updateOrderType();
 });
