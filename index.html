@@ -142,7 +142,22 @@
             </div>
         </div> 
 
+        <!-- Place order button -->
+        <div id="place-order-container">
+            <button onClick="placeOrder()"> PLACE ORDER</button>
+        </div>
+
+        <!-- Order confirmation -->
+         <div id="order-confirmation" style="display: none;">
+            <h2> ORDER CONFIRMATION </h2>
+            <div id="confirmation-details">
+            </div>
+            <p style="text-align: center; color: #28a745; font-size: 1.2em; margin-top:20px;">
+                Thank you for your Order!
+            </p>
+            <button onclick="closeConfirmation()">Close</button>
+         </div>
+
         <script src="script.js"></script>
-    </div>        
-        
+    </div>             
 </body>      
