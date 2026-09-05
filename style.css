@@ -181,3 +181,66 @@ hr {
 #address-container.hidden {
     display: none;
 }
+
+/* Place Order button */
+
+#place-order-container {
+    text-align:center;
+    margin: 30px 0;
+}
+
+#place-order-container button {
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15p 40px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor:pointer;
+    transition: background 0.3s;
+}
+
+#place-order-container button:hover {
+    background: #1e7e34;
+}
+
+/* Order Confirmation */
+#order-confirmation {
+    background: #fff;
+    border: 3px solid #28a745;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+    box-shadow: 0 4px 20px rgba(40, 167, 69, 0.2);
+}
+
+#confirmation-details .confirmation-line {
+    display:flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+#confirmation-details .total-line {
+    font-size: 1.2em;
+    font-weight: bold;
+    border-top: 2px solid #28a745;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+#order-confirmation button {
+    display: block;
+    margin: 15px auto 0;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 16px;
+    cursor: pointer;
+}
+
+#order-confirmation button:hover {
+    background: #5a6268;
+}
