@@ -148,15 +148,17 @@
         </div>
 
         <!-- Order confirmation -->
-         <div id="order-confirmation" style="display: none;">
-            <h2> ORDER CONFIRMATION </h2>
-            <div id="confirmation-details">
+        <!-- Order Summary -->
+        <div id="order-summary">
+            <h2>Order Summary</h2>
+            <div id="summary-items">
+                <p>No items selected yet.</p>
             </div>
-            <p style="text-align: center; color: #28a745; font-size: 1.2em; margin-top:20px;">
-                Thank you for your Order!
-            </p>
-            <button onclick="closeConfirmation()">Close</button>
-         </div>
+            <hr>
+            <p><strong>Subtotal:</strong> Rs. <span id="subtotal">0</span></p>
+            <p><strong>Delivery charge:</strong> Rs. <span id="delivery-charge">0</span></p>
+            <p><strong>Grand Total:</strong> Rs. <span id="grand-total">0</span></p>
+        </div>
 
         <script src="script.js"></script>
     </div>             

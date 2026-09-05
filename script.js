@@ -144,3 +144,104 @@ function updateOrderType() {
     
          updateOrderType();
 });
+
+// 7. Place Order Button //
+function placeOrder() {
+    const customerName = document.getElementById('customerName').value.trim();
+    const customerPhone = document.getElementById('customerPhone').value.trim();
+    const customerAddress = document.getElementById('customerAddress').value.trim();
+
+    let hasItems = false;
+    let orderItems = [];
+    
+    for (let i = 1; i <= 5; i++) {
+        const qtyElement = document.getElementById('qty-' + i);
+        const quantity = parseInt(qtyElement.textContent);  // ✅ FIXED: text → textContent
+        
+        if (quantity > 0) {
+            hasItems = true;
+            const price = prices[i];
+            const total = price * quantity;
+
+            let itemName = "";
+            if (i === 1) itemName = "Chicken Burger";
+            else if (i === 2) itemName = "Veg Burger";
+            else if (i === 3) itemName = "Chicken Pizza";  // ✅ FIXED: was "Chicken Biryani"
+            else if (i === 4) itemName = "Chicken Biryani";
+            else if (i === 5) itemName = "French Fries";
+
+            orderItems.push({
+                name: itemName,
+                quantity: quantity,
+                price: price,
+                total: total
+            });
+        }
+    }
+    
+    // ---- Step 3: Validate ----
+    if (customerName === "") {
+        alert("Please enter the customer's name.");
+        return;
+    }
+    
+    if (customerPhone === "") {
+        alert("Please enter the customer's phone number.");
+        return;
+    }
+    
+    if (!hasItems) {
+        alert("Please add at least one item to the order.");
+        return;
+    }
+    
+    const selectedType = document.querySelector('input[name="orderType"]:checked');
+    if (selectedType && selectedType.value === 'delivery' && customerAddress === "") {
+        alert("Please enter the delivery address.");
+        return;
+    }
+    
+    let orderType = "Dine In";
+    if (selectedType) {
+        if (selectedType.value === 'takeaway') orderType = "Takeaway";
+        else if (selectedType.value === 'delivery') orderType = "Delivery";
+    }
+    
+    let subtotal = 0;
+    let orderItemsHTML = "";
+    
+    for (let item of orderItems) {
+        subtotal += item.total;
+        orderItemsHTML += `
+            <div class="confirmation-line">
+                <span>${item.name}</span>
+                <span>${item.quantity} × Rs. ${item.price}</span>
+                <span>Rs. ${item.total}</span>
+            </div>
+        `;
+    }
+    
+    const grandTotal = subtotal + deliveryCharge;
+    
+    const confirmationHTML = `
+        <div style="margin-bottom: 15px;">
+            <div class="confirmation-line"><strong>Customer:</strong> <span>${customerName}</span></div>
+            <div class="confirmation-line"><strong>Phone:</strong> <span>${customerPhone}</span></div>
+            ${selectedType && selectedType.value === 'delivery' ? `<div class="confirmation-line"><strong>Address:</strong> <span>${customerAddress}</span></div>` : ''}
+            <div class="confirmation-line"><strong>Order Type:</strong> <span>${orderType}</span></div>
+
+        </div>
+        <hr>${orderItemsHTML} <hr>
+        <div class="confirmation-line"><strong>Subtotal:</strong> <span>Rs. ${subtotal}</span></div>
+        <div class="confirmation-line"><strong>Delivery Charge:</strong> <span>Rs. ${deliveryCharge}</span></div>
+        <div class="confirmation-line total-line"><strong>TOTAL:</strong> <span>Rs. ${grandTotal}</span></div>
+    `;
+    
+    document.getElementById('confirmation-details').innerHTML = confirmationHTML;
+    document.getElementById('order-confirmation').style.display = 'block';
+    document.getElementById('order-confirmation').scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeConfirmation() {
+    document.getElementById('order-confirmation').style.display = 'none';
+}
